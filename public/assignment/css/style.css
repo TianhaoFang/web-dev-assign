@@ -4,4 +4,29 @@ input.form-control {
 
 body {
     padding-top: 36px;
+    padding-bottom: 51px;
+}
+
+.spread {
+    width: 100%;
+}
+
+.navy-color {
+    background-color: navy;
+}
+
+.navy-color .navbar-brand {
+    color: white; !important;
+}
+
+.navy-color a {
+    color: white;
+}
+
+.navbar.navbar-default.navbar-fixed-bottom {
+    max-height: 40px;
+}
+
+.navbar-brand a {
+    height: 90px;
 }
