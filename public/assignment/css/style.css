@@ -15,12 +15,16 @@ body {
     background-color: navy;
 }
 
-.navy-color .navbar-brand {
-    color: white; !important;
+.navy-color a {
+    color: white !important;
 }
 
-.navy-color a {
-    color: white;
+.grey-color {
+    background-color: #f5f5f5;
+}
+
+.grey-color a {
+    color: gray; !important;
 }
 
 .navbar.navbar-default.navbar-fixed-bottom {
@@ -33,4 +37,8 @@ body {
 
 .back-arrow {
     padding-right: 20px;
+}
+
+.navy-color .back-arrow {
+    color: white;
 }
