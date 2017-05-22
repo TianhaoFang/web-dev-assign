@@ -42,3 +42,21 @@ body {
 .navy-color .back-arrow {
     color: white;
 }
+
+.attach-editor {
+    position: relative;
+}
+
+.attach-editor .content {
+    margin-bottom: 20px;
+}
+
+.attach-editor .tool {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.attach-editor .tool .glyphicon-align-justify {
+    color: black;
+}
