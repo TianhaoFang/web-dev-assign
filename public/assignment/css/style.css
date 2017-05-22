@@ -43,6 +43,10 @@ body {
     color: white;
 }
 
+.container .table td {
+    border: none;
+}
+
 .attach-editor {
     position: relative;
 }
