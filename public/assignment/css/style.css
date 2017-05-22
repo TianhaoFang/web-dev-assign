@@ -31,13 +31,23 @@ body {
     max-height: 40px;
 }
 
-.navbar-header b {
-    font-size: 150%;
+@media (min-width: 350px) {
+    .navbar-header b {
+        font-size: 150%;
+    }
+    .glyphicon {
+        padding-right: 10px; !important;
+    }
 }
 
-.glyphicon {
-    padding-right: 20px; !important;
-}
+/*@media (max-width: 350px) {*/
+    /*.navbar-header b {*/
+        /*font-size: 90%;*/
+    /*}*/
+/*}*/
+
+
+
 
 .navy-color .back-arrow {
     color: white;
