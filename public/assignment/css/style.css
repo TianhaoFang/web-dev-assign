@@ -35,8 +35,8 @@ body {
     font-size: 150%;
 }
 
-.back-arrow {
-    padding-right: 20px;
+.glyphicon {
+    padding-right: 20px; !important;
 }
 
 .navy-color .back-arrow {
@@ -51,12 +51,24 @@ body {
     margin-bottom: 20px;
 }
 
+.content .embed-responsive {
+    max-height: 100px;
+}
+
 .attach-editor .tool {
     position: absolute;
     top: 0;
     right: 0;
 }
 
+.attach-editor .tool .glyphicon {
+    padding-right: 0;
+}
+
 .attach-editor .tool .glyphicon-align-justify {
     color: black;
+}
+
+.link-color {
+    color: #337ab7;
 }
