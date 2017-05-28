@@ -32,7 +32,7 @@
                     Object.assign(oldUser, user, {_id: oldUser._id});
                 },
                 deleteUser(userId){
-                    for(let i = 0; i < users.length; i++){
+                    for(var i = 0; i < users.length; i++){
                         if(users[i]._id === userId){
                             users.splice(i, 1);
                             return;
