@@ -10,5 +10,6 @@
         .config(function ($routeProvider) {
             $routeProvider
                 .when("/", loginPage)
+                .when("/login", loginPage)
         })
 })();
