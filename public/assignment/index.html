@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <title>Assignment Home Page</title>
 </head>
-<body>
-    <h1>Assignment Home Page</h1>
-    <br />
-    <a href="login.html" class="btn btn-primary btn-block">Login</a>
+<body ng-app="WebAppMaker">
+<div ng-view=""></div>
+<script src="app.js"></script>
+<!-- controllers -->
+<script src="views/user/controllers/login.controller.client.js"></script>
+
+<script src="config.js"></script>
 </body>
 </html>
