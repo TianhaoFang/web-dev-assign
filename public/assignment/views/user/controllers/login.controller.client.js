@@ -1,13 +1,15 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("LoginController", function ($location) {
-            var vm = this;
+        .controller("LoginController", function ($location, UserService) {
+            const vm = this;
             console.log("jump to LoginController");
-            vm.username = "";
-            vm.password = "";
-            vm.login = function (user, password) {
-                alert("user:" + user + " password:" + password);
-            };
+            Object.assign(vm, {
+                username: "",
+                password: "",
+                login(username, password){
+                    console.log(UserService.findUserById(username));
+                }
+            });
         })
 })();
