@@ -21,11 +21,11 @@
                 return users.find((item) => item._id === userId);
             },
             findUserByUsername(username){
-                return users.find((item) => item.name === username);
+                return users.find((item) => item.username === username);
             },
             findUserByCredentials(username, password){
                 return users.find(
-                    (item) => item.name === username && item.password === password
+                    (item) => item.username === username && item.password === password
                 );
             },
             updateUser(userId, user){
