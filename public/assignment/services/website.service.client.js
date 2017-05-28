@@ -16,13 +16,21 @@
             {"_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem"}
         ];
 
+        function checkExist(website, idOrName) {
+            if (!website) throw new Error("not find website with id/userId " + idOrName);
+            else return website;
+        }
+
+        function genId() {
+            return String(newId++);
+        }
+
         // the service definition
         return {
             createWebsite(userId, website){
-                website._id = String(newId);
+                website._id = genId();
                 website.developerId = userId;
                 websites.push(website);
-                newId++;
             },
             findWebsitesByUser(userId){
                 return websites.filter((elem) => elem.developerId === userId);
@@ -45,10 +53,5 @@
                 checkExist(null, websiteId);
             }
         };
-
-        function checkExist(website, idOrName) {
-            if (!website) throw new Error("not find website with id/userId " + idOrName);
-            else return website;
-        }
     }
 })();
