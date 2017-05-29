@@ -22,7 +22,7 @@
         <tbody>
         <tr ng-repeat="website in model.list">
             <td class="lead">
-                <a ng-href="{{model.baseUrl + '/website/' + website._id}}">
+                <a ng-href="{{model.baseUrl + '/website/' + website._id + '/page'}}">
                     {{website.name}}
                 </a>
                 <a ng-href="{{model.baseUrl + '/website/' + website._id}}">
