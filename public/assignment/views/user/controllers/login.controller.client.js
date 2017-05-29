@@ -5,7 +5,12 @@
             const vm = this;
             console.log("jump to LoginController");
             vm.login = function(username, password){
-                console.log(UserService.findUserById(username));
+                var user = UserService.findUserByCredentials(username, password);
+                if(!user){
+                    vm.alert("could not login with current username and password");
+                }else{
+                    $location.url("/user/" + user._id);
+                }
             };
 
             init();
