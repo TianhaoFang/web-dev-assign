@@ -39,7 +39,7 @@
                 return websites.find(function(elem){ return elem._id === websiteId; });
             },
             updateWebsite: function(websiteId, website){
-                var oldValue = checkExist(findWebsiteById(websiteId), websiteId);
+                var oldValue = checkExist(this.findWebsiteById(websiteId), websiteId);
                 Object.assign(oldValue, website, {_id: oldValue._id});
                 return oldValue;
             },

@@ -33,5 +33,10 @@
                     controller: "WebsiteNewController",
                     controllerAs: "model"
                 })
+                .when("/user/:uid/website/:wid", {
+                    templateUrl: "views/website/templates/website-edit.view.client.html",
+                    controller: "WebsiteEditController",
+                    controllerAs: "model"
+                })
         })
 })();
