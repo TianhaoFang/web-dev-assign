@@ -27,23 +27,23 @@
 
         // the service definition
         return {
-            createWebsite(userId, website){
+            createWebsite: function(userId, website){
                 website._id = genId();
                 website.developerId = userId;
                 websites.push(website);
             },
-            findWebsitesByUser(userId){
-                return websites.filter((elem) => elem.developerId === userId);
+            findWebsitesByUser: function(userId){
+                return websites.filter(function(elem){ return elem.developerId === userId; });
             },
-            findWebsiteById(websiteId){
-                return websites.find((elem) => elem._id === websiteId);
+            findWebsiteById: function(websiteId){
+                return websites.find(function(elem){ return elem._id === websiteId; });
             },
-            updateWebsite(websiteId, website){
+            updateWebsite: function(websiteId, website){
                 var oldValue = checkExist(findWebsiteById(websiteId), websiteId);
                 Object.assign(oldValue, website, {_id: oldValue._id});
                 return oldValue;
             },
-            deleteWebsite(websiteId){
+            deleteWebsite: function(websiteId){
                 for (var i = 0; i < websites.length; i++) {
                     if (websites[i]._id === websiteId) {
                         websites.splice(i, 1);

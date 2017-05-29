@@ -28,24 +28,24 @@
         }
 
         return {
-            createWidget(pageId, widget){
+            createWidget: function(pageId, widget){
                 widget._id = genId();
                 widget.pageId = pageId;
                 widgets.push(widget);
                 return widget;
             },
-            findWidgetsByPageId(pageId){
-                return widgets.filter((page) => page.pageId === pageId);
+            findWidgetsByPageId: function(pageId){
+                return widgets.filter(function(page){ return page.pageId === pageId; });
             },
-            findWidgetById(widgetId){
-                return widgets.find((page) => page._id === widgetId);
+            findWidgetById: function(widgetId){
+                return widgets.find(function(page){ return page._id === widgetId; });
             },
-            updateWidget(widgetId, widget){
+            updateWidget: function(widgetId, widget){
                 widget._id = widgetId;
                 var oldValue = this.findWidgetById(widgetId);
                 Object.assign(oldValue, widget);
             },
-            deleteWidget(widgetId){
+            deleteWidget: function(widgetId){
                 for(var i = 0; i < widgets.length; i++){
                     if(widgets[i]._id === widgetId){
                         widgets.splice(i, 1);

@@ -14,26 +14,26 @@
 
         // the service
         return {
-            createUser(user) {
+            createUser: function(user) {
                 users.push(user);
             },
-            findUserById (userId) {
-                return users.find((item) => item._id === userId);
+            findUserById: function(userId) {
+                return users.find(function(item){ return item._id === userId; });
             },
-            findUserByUsername(username){
-                return users.find((item) => item.username === username);
+            findUserByUsername: function(username){
+                return users.find(function(item){ return item.username === username; });
             },
-            findUserByCredentials(username, password){
-                return users.find(
-                    (item) => item.username === username && item.password === password
-                );
+            findUserByCredentials: function(username, password){
+                return users.find(function (item) {
+                        return item.username === username && item.password === password;
+                });
             },
-            updateUser(userId, user){
-                let oldUser = this.findUserById(userId);
+            updateUser: function(userId, user){
+                var oldUser = this.findUserById(userId);
                 checkUserExist(oldUser, userId);
                 Object.assign(oldUser, user, {_id: oldUser._id});
             },
-            deleteUser(userId){
+            deleteUser: function(userId){
                 for (var i = 0; i < users.length; i++) {
                     if (users[i]._id === userId) {
                         users.splice(i, 1);
@@ -44,7 +44,7 @@
             }
         };
 
-        function checkUserExist(user, name = "") {
+        function checkUserExist(user, name) {
             if (!user) {
                 throw new Error("the user is not find in id/name" + name);
             }

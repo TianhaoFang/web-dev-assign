@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     angular
         .module("WebAppMaker")
@@ -18,23 +20,23 @@
         }
 
         return {
-            createPage(websiteId, page){
+            createPage: function(websiteId, page){
                 page._id = genId();
                 page.websiteId = websiteId;
                 pages.push(page);
             },
-            findPageByWebsiteId(websiteId){
-                return pages.filter((elem) => elem.websiteId === websiteId);
+            findPageByWebsiteId: function(websiteId){
+                return pages.filter(function(elem){ return elem.websiteId === websiteId; });
             },
-            findPageById(pageId){
-                return pages.find((elem) => elem._id === pageId);
+            findPageById: function(pageId){
+                return pages.find(function(elem){ return elem._id === pageId; });
             },
-            updatePage(pageId, page){
+            updatePage: function(pageId, page){
                 var oldPage = this.findPageById(pageId);
                 Object.assign(page, {_id:oldPage._id});
                 Object.assign(oldPage, page);
             },
-            deletePage(pageId){
+            deletePage: function(pageId){
                 for(var i = 0; i < pages.length; i++){
                     if(pages[i]._id === pageId){
                         pages.splice(i, 1);
