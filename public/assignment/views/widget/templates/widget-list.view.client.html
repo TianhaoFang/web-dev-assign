@@ -1,0 +1,76 @@
+<nav class="navbar navbar-default navbar-fixed-top grey-color">
+    <div class="container">
+        <div class="navbar-header container">
+            <a href="page-list.html">
+                <span class="navbar-brand glyphicon glyphicon-chevron-left back-arrow"></span>
+            </a>
+            <a class="navbar-brand" href="#">
+                <b class="">Widgets</b>
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="widget-choose.html" class="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="attach-editor" ng-repeat="widget in model.list">
+        <div ng-switch="widget.widgetType" class="content">
+            <div ng-switch-when="HEADING">
+                <ng-include src="'views/widget/templates/widget-heading.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'views/widget/templates/widget-image.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
+            </div>
+        </div>
+        <div class="tool">
+            <a href="widget-heading.html"><span class="glyphicon glyphicon-cog"></span></a>
+            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+        </div>
+    </div>
+    <div class="attach-editor">
+        <div class="content">
+            <p>As part of a regulatory review of the merger, Facebook (FB, Tech30) told the European Commission in 2014
+                that it would not be able to match up existing user profiles with WhatsApp phone numbers.
+                Two years later it did exactly that.
+                The European Commission said Thursday that Facebook staff knew at the time of the review that it was
+                technically possible.
+                It's the first time Europe's antitrust agency has fined a company for providing misleading information
+                about a takeover. But it won't have an impact on the deal, which was completed in October 2014.
+                Facebook paid $19 billion for WhatsApp, by far its largest acquisition ever. Using the messaging app's
+                data allows Facebook to target its ads better, boosting profits.
+                "Today's decision sends a clear signal to companies that they must comply with all aspects of EU merger
+                rules, including the obligation to provide correct information," said Margrethe Vestager, the EU's top
+                antitrust official.
+                <a href="http://money.cnn.com/2017/05/01/technology/facebook-google-hate-speech-uk/?iid=EL">Related:
+                    U.K. says Facebook and Google must tackle hate speech</a></p>
+        </div>
+        <div class="tool">
+            <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
+            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom grey-color">
+    <div class="container">
+        <div class="row navbar-right navbar-text container">
+            <div class="">
+                <a href="#">
+                    <span class="glyphicon glyphicon-play"></span>
+                </a>
+                <a href="#">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
+                <a href="profile.html">
+                    <span class="glyphicon glyphicon-user link-color pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
