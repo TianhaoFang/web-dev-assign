@@ -4,12 +4,15 @@
         .controller("LoginController", function ($location, UserService) {
             const vm = this;
             console.log("jump to LoginController");
-            Object.assign(vm, {
-                username: "",
-                password: "",
-                login(username, password){
-                    console.log(UserService.findUserById(username));
-                }
-            });
+            vm.login = function(username, password){
+                console.log(UserService.findUserById(username));
+            };
+
+            init();
+            
+            function init() {
+                vm.username = "";
+                vm.password = "";
+            }
         })
 })();
