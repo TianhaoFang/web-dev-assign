@@ -1,0 +1,47 @@
+<nav class="navbar navbar-default navbar-fixed-top navy-color">
+    <div class="container">
+        <div class="navbar-header container">
+            <a ng-href="{{model.baseUrl}}" class="navbar-brand">
+                <span class="glyphicon glyphicon-chevron-left back-arrow"></span>
+            </a>
+            <a class="navbar-brand" ng-href="">
+                <b class="">Websites</b>
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-href="{{model.baseUrl + '/website/new'}}" class="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <table class="table">
+        <tbody>
+        <tr ng-repeat="website in model.list">
+            <td class="lead">
+                <a ng-href="{{model.baseUrl + '/website/' + website._id}}">
+                    {{website.name}}
+                </a>
+                <a ng-href="{{model.baseUrl + '/website/' + website._id}}">
+                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom navy-color">
+    <div class="container">
+        <div class="row navbar-right navbar-text container">
+            <div class="">
+                <a ng-href="{{model.baseUrl}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
