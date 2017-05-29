@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top grey-color">
     <div class="container">
         <div class="navbar-header container">
-            <span class="navbar-brand glyphicon glyphicon-chevron-left back-arrow"></span>
-            <a class="navbar-brand" href="#">
+            <a ng-href="{{model.currentUrl}}" class="navbar-brand">
+                <span class="glyphicon glyphicon-chevron-left back-arrow"></span>
+            </a>
+            <a class="navbar-brand" href="">
                 <b class="">New Page</b>
             </a>
             <p class="navbar-text pull-right">
-                <a href="#" class="">
+                <a href="" class="" ng-click="model.newPage(model.item)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -29,11 +21,12 @@
     <form>
         <div class="form-group">
             <label class="" for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Page Name"/>
+            <input type="text" class="form-control" id="name" placeholder="Page Name" ng-model="model.item.name"/>
         </div>
         <div class="form-group">
             <label class="" for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Page Title"/>
+            <input type="text" class="form-control" id="title" placeholder="Page Title"
+                   ng-model="model.item.description"/>
         </div>
     </form>
 </div>
@@ -42,12 +35,10 @@
     <div class="container">
         <div class="row navbar-right navbar-text container">
             <div class="">
-                <a href="#">
+                <a ng-href="{{'#!/user/' + model.userId}}">
                     <span class="glyphicon glyphicon-user link-color pull-right"></span>
                 </a>
             </div>
         </div>
     </div>
 </nav>
-</body>
-</html>
