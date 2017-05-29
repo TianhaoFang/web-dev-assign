@@ -5,6 +5,7 @@
 
     function UserService() {
         // local user array
+        var newId = 501;
         var users = [
             {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
             {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
@@ -12,10 +13,16 @@
             {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
         ];
 
+        function genId() {
+            return String(newId++);
+        }
+
         // the service
         return {
             createUser: function(user) {
+                user._id = genId();
                 users.push(user);
+                return user;
             },
             findUserById: function(userId) {
                 return users.find(function(item){ return item._id === userId; });
