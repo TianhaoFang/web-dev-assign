@@ -20,6 +20,7 @@
         // the service
         return {
             createUser: function(user) {
+                user = Object.assign({}, user);
                 user._id = genId();
                 users.push(user);
                 return user;

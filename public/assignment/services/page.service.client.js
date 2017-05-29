@@ -21,6 +21,7 @@
 
         return {
             createPage: function(websiteId, page){
+                page = Object.assign({}, page);
                 page._id = genId();
                 page.websiteId = websiteId;
                 pages.push(page);

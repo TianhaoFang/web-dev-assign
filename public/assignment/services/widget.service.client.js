@@ -29,6 +29,7 @@
 
         return {
             createWidget: function(pageId, widget){
+                widget = Object.assign({}, widget);
                 widget._id = genId();
                 widget.pageId = pageId;
                 widgets.push(widget);

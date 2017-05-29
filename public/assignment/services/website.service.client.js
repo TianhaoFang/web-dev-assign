@@ -28,9 +28,11 @@
         // the service definition
         return {
             createWebsite: function(userId, website){
+                website = Object.assign({}, website);
                 website._id = genId();
                 website.developerId = userId;
                 websites.push(website);
+                return website;
             },
             findWebsitesByUser: function(userId){
                 return websites.filter(function(elem){ return elem.developerId === userId; });
