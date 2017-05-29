@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Register</h1>
+    <input type="text"
+           class="form-control"
+           placeholder="username"
+           ng-model="username"/>
+    <input type="password"
+           class="form-control"
+           placeholder="password"
+           ng-model="password"/>
+    <input type="password"
+           class="form-control"
+           placeholder="very password"
+           ng-model="password2"/>
+    <span ng-show="model.hasError" class="has-error help-block">
+        Password should not be empty or password should be same
+    </span>
+    <a class="btn btn-primary btn-block"
+       ng-href="" ng-click="model.register(username, password, password2)">Register</a>
+    <a class="btn btn-danger  btn-block"
+       href="login.html">Cancel</a>
+</div>

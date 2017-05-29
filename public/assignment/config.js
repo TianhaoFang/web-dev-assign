@@ -11,5 +11,12 @@
             $routeProvider
                 .when("/", loginPage)
                 .when("/login", loginPage)
+                .when("default", loginPage)
+
+                .when("/register", {
+                    templateUrl: "views/user/templates/register.view.client.html",
+                    controller: "RegisterController",
+                    controllerAs: "model"
+                })
         })
 })();
