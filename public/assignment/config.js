@@ -23,6 +23,7 @@
                     controller: "ProfileController",
                     controllerAs: "model"
                 })
+
                 .when("/user/:uid/website", {
                     templateUrl: "views/website/templates/website-list.view.client.html",
                     controller: "WebsiteListController",
@@ -36,6 +37,12 @@
                 .when("/user/:uid/website/:wid", {
                     templateUrl: "views/website/templates/website-edit.view.client.html",
                     controller: "WebsiteEditController",
+                    controllerAs: "model"
+                })
+
+                .when("/user/:uid/website/:wid/page", {
+                    templateUrl: "views/page/templates/page-list.view.client.html",
+                    controller: "PageListController",
                     controllerAs: "model"
                 })
         })

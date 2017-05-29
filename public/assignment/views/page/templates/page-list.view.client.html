@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default navbar-fixed-top grey-color">
+    <div class="container">
+        <div class="navbar-header container">
+            <a ng-href="{{model.parentUrl}}">
+                <span class="navbar-brand glyphicon glyphicon-chevron-left back-arrow"></span>
+            </a>
+            <a class="navbar-brand" href="">
+                <b class="">Pages</b>
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-href="{{model.currentUrl + '/new'}}" class="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <table class="table">
+        <tbody>
+        <tr ng-repeat="page in model.list">
+            <td class="lead">
+                <a ng-href="{{model.currentUrl + '/' + page._id + '/widget'}}">{{page.name}}</a>
+                <a ng-href="{{model.currentUrl + '/' + page._id}}">
+                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom grey-color">
+    <div class="container">
+        <div class="row navbar-right navbar-text container">
+            <div class="">
+                <a ng-href="{{'#!/user/' + model.userId}}">
+                    <span class="glyphicon glyphicon-user link-color pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
