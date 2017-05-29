@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("WidgetListController", WidgetListController);
 
-    function WidgetListController($routeParams, WidgetService, $sce) {
+    function WidgetListController($routeParams, WidgetService, $sce, $location) {
         var vm = this;
         var userId = $routeParams['uid'];
         var websiteId = $routeParams['wid'];
@@ -20,6 +20,8 @@
 
         function init() {
             vm.list = WidgetService.findWidgetsByPageId(pageId);
+            vm.currentUrl = "#!" + $location.url();
+            vm.userId = userId;
         }
     }
 })();
