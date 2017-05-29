@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default navbar-fixed-top grey-color">
+    <div class="container">
+        <div class="navbar-header container">
+            <a ng-href="{{model.currentUrl + '/../'}}" class="navbar-brand">
+                <span class="glyphicon glyphicon-chevron-left back-arrow"></span>
+            </a>
+            <a class="navbar-brand" href="">
+                <b class="">Widget Edit</b>
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="" class="" ng-click="model.submit(model.item)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container" ng-switch="model.item.widgetType">
+    <div ng-switch-when="HEADING">
+        <ng-include src="'views/widget/editors/widget-heading-edit.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="IMAGE">
+        <ng-include src="'views/widget/editors/widget-image-edit.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="YOUTUBE">
+        <ng-include src="'views/widget/editors/widget-youtube-edit.view.client.html'"></ng-include>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom grey-color">
+    <div class="container">
+        <div class="row navbar-right navbar-text container">
+            <div class="">
+                <a ng-href="{{'#!/user/' + model.userId}}">
+                    <span class="glyphicon glyphicon-user link-color pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
