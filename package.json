@@ -4,9 +4,15 @@
   "description": "Web Dev at Northeastern University",
   "main": "server.js",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "mongoose": "^4.4.15"
+    "glob": "^7.1.2",
+    "mongoose": "^4.4.15",
+    "webpack": "^2.6.1"
   },
   "devDependencies": {},
   "scripts": {
