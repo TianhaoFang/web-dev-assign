@@ -15,11 +15,12 @@
                             firstName: "",
                             lastName: ""
                         };
-                        UserService.createUser(newUser).then((user) => {
+                        return UserService.createUser(newUser).then((user) => {
                             $location.url("/user/" + newUser._id);
                         });
                     } else {
                         vm.hasError = true;
+                        return Promise.resolve("has error");
                     }
                 }
             )

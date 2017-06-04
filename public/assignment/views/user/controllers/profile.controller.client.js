@@ -18,7 +18,7 @@
                         firstName: firstName,
                         lastName: lastName
                     };
-                    UserService.updateUser(userId, newUser).then(
+                    return UserService.updateUser(userId, newUser).then(
                         () => alert("update success")
                     );
                 }

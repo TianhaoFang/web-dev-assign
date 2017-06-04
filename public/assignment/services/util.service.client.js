@@ -8,15 +8,24 @@
             parseData(httpResponse){
                 return httpResponse.data;
             },
-            alertError(httpResponse){
-                let message = httpResponse.message;
-                console.error(httpResponse);
-                if(message) alert(message);
-                else alert(httpResponse);
-            },
+            alertError,
             catchWithAlert(callback){
-                return callback().catch(this.alertError);
+                let promise = callback();
+                promise.catch(alertError);
             }
         }
+    }
+
+    function alertError(httpResponse){
+        let message = null;
+        if(httpResponse && httpResponse.data){
+            message = httpResponse.data;
+            if(message.message){
+                message = message.message;
+            }
+        }
+        console.error(httpResponse);
+        if(message) alert(message);
+        else alert(httpResponse);
     }
 })();
