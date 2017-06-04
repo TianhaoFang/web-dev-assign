@@ -18,7 +18,7 @@
                 return $http.get("/api/website/" + websiteId).then(parseData);
             },
             updateWebsite: function(websiteId, website){
-                return $http.put("/api/website/" + websiteId).then(parseData);
+                return $http.put("/api/website/" + websiteId, website).then(parseData);
             },
             deleteWebsite: function(websiteId){
                 return $http.delete("/api/website/" + websiteId).then(parseData);
