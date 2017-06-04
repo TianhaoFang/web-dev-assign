@@ -3,22 +3,26 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController(UserService, $location) {
+    function RegisterController(UserService, $location, UtilService) {
         var vm = this;
 
-        vm.register = function(username, password, password2){
-            if(password === password2 && password){
-                var newUser = {
-                    username: username,
-                    password: password,
-                    firstName: "",
-                    lastName: ""
-                };
-                newUser = UserService.createUser(newUser);
-                $location.url("/user/" + newUser._id);
-            }else{
-                vm.hasError = true;
-            }
+        vm.register = function (username, password, password2) {
+            UtilService.catchWithAlert(() => {
+                    if (password === password2 && password) {
+                        let newUser = {
+                            username: username,
+                            password: password,
+                            firstName: "",
+                            lastName: ""
+                        };
+                        UserService.createUser(newUser).then((user) => {
+                            $location.url("/user/" + newUser._id);
+                        });
+                    } else {
+                        vm.hasError = true;
+                    }
+                }
+            )
         };
 
         init();
@@ -27,7 +31,6 @@
             vm.password = "";
             vm.password2 = "";
             vm.hasError = false;
-            console.log(vm);
         }
     }
 })();

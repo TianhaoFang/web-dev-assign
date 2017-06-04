@@ -3,19 +3,16 @@
         .module("WebAppMaker")
         .controller("LoginController", function ($location, UserService) {
             const vm = this;
-            console.log("jump to LoginController");
             init();
 
-            vm.login = function(username, password){
-                var user = UserService.findUserByCredentials(username, password);
-                console.log(vm);
-                if(!user){
-                    vm.hasError = true;
-                }else{
+            vm.login = function (username, password) {
+                console.log("start login");
+                UserService.findUserByCredentials(username, password).then((user) => {
+                    console.log("finish login with right user");
                     $location.url("/user/" + user._id);
-                }
+                }).catch((response) => vm.hasError = true);
             };
-            
+
             function init() {
                 vm.username = "asdad";
                 vm.password = "xczcc";

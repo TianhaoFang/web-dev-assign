@@ -3,59 +3,34 @@
         .module("WebAppMaker")
         .factory("UserService", UserService);
 
-    function UserService() {
-        // local user array
-        var newId = 501;
-        var users = [
-            {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
-            {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
-            {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
-        ];
-
-        function genId() {
-            return String(newId++);
-        }
+    function UserService($http, UtilService) {
+        let parseData = UtilService.parseData;
 
         // the service
         return {
             createUser: function(user) {
-                user = Object.assign({}, user);
-                user._id = genId();
-                users.push(user);
-                return user;
+                return $http.post("/api/user", user).then(parseData);
             },
             findUserById: function(userId) {
-                return users.find(function(item){ return item._id === userId; });
+                return $http.get("/api/user/" + userId).then(parseData);
             },
             findUserByUsername: function(username){
-                return users.find(function(item){ return item.username === username; });
+                return $http.get("/api/user", {params: {
+                    username: username
+                }}).then(parseData);
             },
             findUserByCredentials: function(username, password){
-                return users.find(function (item) {
-                        return item.username === username && item.password === password;
-                });
+                return $http.get("/api/user", {params: {
+                    username: username,
+                    password: password
+                }}).then(parseData);
             },
             updateUser: function(userId, user){
-                var oldUser = this.findUserById(userId);
-                checkUserExist(oldUser, userId);
-                Object.assign(oldUser, user, {_id: oldUser._id});
+                return $http.put("/api/user/" + userId, user).then(parseData);
             },
             deleteUser: function(userId){
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i]._id === userId) {
-                        users.splice(i, 1);
-                        return;
-                    }
-                }
-                checkUserExist(null, userId);
+                return $http.delete("/api/user/" + userId).then(parseData);
             }
         };
-
-        function checkUserExist(user, name) {
-            if (!user) {
-                throw new Error("the user is not find in id/name" + name);
-            }
-        }
     }
 })();
