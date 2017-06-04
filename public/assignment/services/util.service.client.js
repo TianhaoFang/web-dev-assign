@@ -17,7 +17,7 @@
     }
 
     function alertError(httpResponse){
-        let message = null;
+        let message = httpResponse;
         if(httpResponse && httpResponse.data){
             message = httpResponse.data;
             if(message.message){
