@@ -13,8 +13,9 @@
                 alert("none of the input field should be empty");
                 return;
             }
-            PageService.createPage(websiteId, item);
-            $location.url(vm.currentUrl.replace("#!", ""));
+            PageService.createPage(websiteId, item).then(() => {
+                $location.url(vm.currentUrl.replace("#!", ""));
+            });
         };
 
         init();

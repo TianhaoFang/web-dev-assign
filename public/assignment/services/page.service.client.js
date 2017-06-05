@@ -5,45 +5,24 @@
         .module("WebAppMaker")
         .factory("PageService", PageService);
 
-    function PageService() {
-        // local page data
-        var newId = 1001;
-        var pages = [
-            {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
-            {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
-            {"_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"}
-        ];
-
-        // private functions
-        function genId() {
-            return String(newId++);
-        }
+    function PageService($http, UtilService) {
+        const parseData = UtilService.parseData;
 
         return {
             createPage: function(websiteId, page){
-                page = Object.assign({}, page);
-                page._id = genId();
-                page.websiteId = websiteId;
-                pages.push(page);
+                return $http.post("/api/website/" + websiteId + "/page", page).then(parseData);
             },
             findPageByWebsiteId: function(websiteId){
-                return pages.filter(function(elem){ return elem.websiteId === websiteId; });
+                return $http.get("/api/website/" + websiteId + "/page").then(parseData);
             },
             findPageById: function(pageId){
-                return pages.find(function(elem){ return elem._id === pageId; });
+                return $http.get("/api/page/" + pageId).then(parseData);
             },
             updatePage: function(pageId, page){
-                var oldPage = this.findPageById(pageId);
-                Object.assign(page, {_id:oldPage._id});
-                Object.assign(oldPage, page);
+                return $http.put("/api/page/" + pageId, page).then(parseData);
             },
             deletePage: function(pageId){
-                for(var i = 0; i < pages.length; i++){
-                    if(pages[i]._id === pageId){
-                        pages.splice(i, 1);
-                        return;
-                    }
-                }
+                return $http.delete("/api/page/" + pageId).then(parseData);
             }
         };
     }

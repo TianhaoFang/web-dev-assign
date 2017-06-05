@@ -15,7 +15,9 @@
             vm.currentUrl = vm.parentUrl + "/page";
             vm.userId = userId;
 
-            vm.list = PageService.findPageByWebsiteId(websiteId);
+            PageService.findPageByWebsiteId(websiteId).then(list => {
+                vm.list = list;
+            });
         }
     }
 })();
