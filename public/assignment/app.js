@@ -2,7 +2,7 @@ require("babel-polyfill");
 
 (function () {
     angular
-        .module("WebAppMaker", ['ngRoute']);
+        .module("WebAppMaker", ['ngRoute', "wbdvDirectives"]);
 
     async function lott() {
         await new Promise((resolve, reject) => resolve(8));
