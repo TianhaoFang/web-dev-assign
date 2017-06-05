@@ -15,8 +15,8 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="attach-editor" ng-repeat="widget in model.list">
+<div class="container" wbdv-sortable="sort-id" sort-callback="model.sortCallback">
+    <div class="attach-editor" ng-repeat="widget in model.list" sort-id="{{$index}}">
         <div ng-switch="widget.widgetType" class="content">
             <div ng-switch-when="HEADING">
                 <ng-include src="'views/widget/templates/widget-heading.view.client.html'"></ng-include>
@@ -26,6 +26,9 @@
             </div>
             <div ng-switch-when="YOUTUBE">
                 <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-default=>
+                not implemented
             </div>
         </div>
         <div class="tool">
