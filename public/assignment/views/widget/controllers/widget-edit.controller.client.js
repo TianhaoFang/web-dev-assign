@@ -25,6 +25,15 @@
             });
         };
 
+        vm.uploadImage = function () {
+            let file = document.getElementById("upload").files[0];
+            if(!file) return alert("please select a file");
+            WidgetService.uploadImage(file).then(result => {
+                vm.item.url = result.url;
+                alert("upload success, press √ to submit");
+            });
+        };
+
         function init() {
             vm.currentUrl = "#!" + $location.url();
             vm.userId = userId;
