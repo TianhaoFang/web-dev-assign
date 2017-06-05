@@ -1,10 +1,17 @@
+let multer = require("multer");
+
 module.exports = function (app) {
+    let upload = multer({
+        dest: __dirname + "/../../public/uploads"
+    });
+
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.put("/api/page/:pageId/widget", reorderWidget);
+    app.post("/api/upload", upload.single("myFile"), uploadImage);
 
     // local widget data
     var widgets = [
@@ -99,13 +106,23 @@ module.exports = function (app) {
             });
         }
 
-        if(initial !== final){
+        if (initial !== final) {
             swapArray(widgets, imageList[initial][0], imageList[final][0]);
             swapArray(imageList, initial, final);
         }
 
         res.json(imageList.map(pair => pair[1]));
     }
+
+    // upload the file using the file reader to do that
+    function uploadImage(req, res) {
+        let myFile = req.file;
+        res.json({
+            file: myFile.filename,
+            url: "/uploads/" + myFile.filename
+        });
+    }
+
 
     function swapArray(array, startId, endId) {
         array.splice(endId, 0, array.splice(startId, 1)[0]);
