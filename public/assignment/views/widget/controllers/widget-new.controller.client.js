@@ -10,11 +10,12 @@
         var pageId = $routeParams['pid'];
 
         vm.newWidget = function (type) {
-            var result = WidgetService.createWidget(pageId, {
+            WidgetService.createWidget(pageId, {
                 widgetType: type
+            }).then(result => {
+                $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId
+                    + "/widget/" + result._id);
             });
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId
-                + "/widget/" + result._id);
         };
 
         init();

@@ -14,20 +14,23 @@
         init();
 
         vm.submit = function (item) {
-            WidgetService.updateWidget(widgetId, item);
-            $location.url(parentUrl);
+            WidgetService.updateWidget(widgetId, item).then(()=>{
+                $location.url(parentUrl);
+            });
         };
 
         vm.deleteItem = function (item) {
-            WidgetService.deleteWidget(item._id);
-            $location.url(parentUrl);
+            WidgetService.deleteWidget(item._id).then(()=>{
+                $location.url(parentUrl);
+            });
         };
 
         function init() {
-            vm.item = WidgetService.findWidgetById(widgetId);
-            vm.item = Object.assign({}, vm.item);
             vm.currentUrl = "#!" + $location.url();
             vm.userId = userId;
+            WidgetService.findWidgetById(widgetId).then(item => {
+                vm.item = Object.assign({}, item);
+            });
         }
     }
 })();

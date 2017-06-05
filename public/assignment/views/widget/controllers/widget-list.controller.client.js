@@ -19,9 +19,11 @@
         init();
 
         function init() {
-            vm.list = WidgetService.findWidgetsByPageId(pageId);
             vm.currentUrl = "#!" + $location.url();
             vm.userId = userId;
+            WidgetService.findWidgetsByPageId(pageId).then(list => {
+                vm.list = list;
+            });
         }
     }
 })();
