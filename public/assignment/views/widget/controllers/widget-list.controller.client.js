@@ -12,21 +12,17 @@
         vm.getYoutubeLink = function (originLink) {
             originLink = originLink.replace("http://", "https://");
             originLink = originLink.replace("youtu.be/", "www.youtube.com/embed/");
-            console.log(originLink);
             return $sce.trustAsResourceUrl(originLink);
         };
 
         vm.sortCallback = function (strList) {
             const diff = findDiffElement(vm.sequence, strList);
-            console.log("diff", diff);
-            console.log(vm.sequence);
             if(diff){
                 const [start, end] = diff;
                 vm.sequence.splice(end, 0, vm.sequence.splice(start, 1)[0]);
-                console.log(vm.sequence);
+                WidgetService.reorderWidget(pageId, start, end);
             }
             vm.sequence = strList;
-            console.log(vm.sequence);
         };
 
         init();
