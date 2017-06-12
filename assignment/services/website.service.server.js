@@ -50,7 +50,7 @@ module.exports = function (app) {
         if (result) {
             res.json(result);
         } else {
-            res.status(404).json({error: "not find such user or website"});
+            res.status(404).json({message: "not find such user or website"});
         }
     }
 };

@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController(UserService, $location) {
+    function RegisterController(UserService, $location, UtilService) {
         var vm = this;
 
         vm.register = function (username, password, password2) {
@@ -15,8 +15,8 @@
                     lastName: ""
                 };
                 return UserService.createUser(newUser).then((user) => {
-                    $location.url("/user/" + newUser._id);
-                });
+                    $location.url("/user/" + user._id);
+                }).catch(UtilService.alertError);
             } else {
                 vm.hasError = true;
             }

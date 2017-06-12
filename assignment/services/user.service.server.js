@@ -17,8 +17,14 @@ module.exports = function (app) {
 
     async function createUser(req, res) {
         let user = req.body;
-        let newUser = await User.createUser(user);
-        res.json(newUser);
+        if(!user.name) return json.status(400).json({
+            message: "name is required"
+        });
+        let existUser = await User.findUserByUsername(user.name);
+        if(existUser) return json.status(400).json({
+            message: "the username is already used"
+        });
+        res.json(await User.createUser(user));
     }
 
     async function findUser(req, res) {
@@ -61,7 +67,7 @@ module.exports = function (app) {
         if (result) {
             res.json(result);
         } else {
-            res.status(404).json({error: "not find such user"});
+            res.status(404).json({message: "not find such user"});
         }
     }
 };
