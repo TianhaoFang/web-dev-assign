@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const User = require("./user.model.server");
 const Website = mongoose.model("Website", require("./website.schema.server"));
 
+const validId = mongoose.Types.ObjectId.isValid;
+
 Website.createWebsiteForUser = async function(userId, website) {
     const user = await User.findUserById(userId);
     if(!user) return null;
@@ -20,6 +22,7 @@ Website.findAllWebsitesForUser = async function(userId) {
 };
 
 Website.findWebsiteById = async function (websiteId) {
+    if(!validId(websiteId)) return null;
     return await this.findById(websiteId).exec();
 };
 
@@ -38,7 +41,8 @@ Website.updateWebsite = async function (websiteId, website) {
 Website.deleteWebsite = async function (websiteId) {
     const oldOne = await this.findWebsiteById(websiteId);
     if(!oldOne) return null;
-    return await this.deleteOne({_id: websiteId});
+    await this.deleteOne({_id: websiteId});
+    return oldOne;
 };
 
 function toPojo(managed) {
