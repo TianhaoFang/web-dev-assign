@@ -8,7 +8,10 @@ const WebsiteSchema = mongoose.Schema({
     name: String,
     description: String,
     pages: [],
-    dateCreated: Date
+    dateCreated: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = WebsiteSchema;

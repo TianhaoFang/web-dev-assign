@@ -6,7 +6,10 @@ const PageSchema = mongoose.Schema({
     title: String,
     description: String,
     widgets: [],
-    dateCreated: Date
+    dateCreated: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = PageSchema;
