@@ -1,3 +1,5 @@
+const User = require("./../model/user.model.server");
+
 module.exports = function (app) {
     let newId = 501;
     const users = [
@@ -13,49 +15,35 @@ module.exports = function (app) {
     app.put("/api/user/:userId", updateUser);
     app.delete("/app/user/:userId", deleteUser);
 
-    function createUser(req, res) {
+    async function createUser(req, res) {
         let user = req.body;
-        user._id = genId();
-        users.push(user);
-        res.json(user);
+        let newUser = await User.createUser(user);
+        res.json(newUser);
     }
 
-    function findUser(req, res) {
+    async function findUser(req, res) {
         const username = req.query.username;
         const password = req.query.password;
         if (username) {
             if (password) {
-                sendNullableJson(res, findUserByCredentials(username, password));
+                sendNullableJson(res, await User.findUserByCredentials(username, password));
             } else {
-                sendNullableJson(res, findUserByUsername(username));
+                sendNullableJson(res, await User.findUserByUsername(username));
             }
         } else {
             res.status(400).json({error: "should have query parameter username and/or password"});
         }
     }
 
-    function findUserByUsername(username) {
-        return users.find(item => item.username === username);
-    }
-
-    function findUserByCredentials(username, password) {
-        return users.find(item => item.username === username && item.password === password);
-    }
-
-    function findUserById(req, res) {
+    async function findUserById(req, res) {
         let userId = req.params.userId;
-        sendNullableJson(res,
-            users.find(item => item._id === userId)
-        );
+        sendNullableJson(res, await User.findUserById(userId));
     }
 
-    function updateUser(req, res) {
+    async function updateUser(req, res) {
         const userId = req.params.userId;
         const user = req.body;
-        const oldUser = users.find(item => item._id === userId);
-        if(!oldUser) return sendNullableJson(res, null);
-        Object.assign(oldUser, user, {_id: oldUser._id});
-        res.json(oldUser);
+        sendNullableJson(res, await User.updateUser(userId, user));
     }
 
     function deleteUser(req, res){
@@ -67,10 +55,6 @@ module.exports = function (app) {
             }
         }
         sendNullableJson(res, null);
-    }
-
-    function genId() {
-        return String(newId++);
     }
 
     function sendNullableJson(res, result) {
