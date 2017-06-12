@@ -35,6 +35,12 @@ User.updateUser = async function(userId, user){
     return await oldUser.save();
 };
 
+User.deleteUser = async function (userId) {
+    const user = await this.findUserById(userId);
+    if(!user) return null;
+    return await this.deleteOne({_id: userId});
+};
+
 function toPojo(managed) {
     if(managed instanceof User){
         return managed.toObject();
