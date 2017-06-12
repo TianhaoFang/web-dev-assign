@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const WidgetSchema = require("./widget.schema.server");
-
 const PageSchema = mongoose.Schema({
     _website: {
         type: mongoose.Schema.Types.ObjectId,
@@ -10,9 +8,10 @@ const PageSchema = mongoose.Schema({
     name: String,
     title: String,
     description: String,
-    widgets: [
-        WidgetSchema
-    ],
+    widgets: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Widget"
+    }],
     dateCreated: {
         type: Date,
         default: Date.now

@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const WebsiteSchema = require("./website.schema.server");
-
 const UserSchema = mongoose.Schema({
     username: String,
     password: String,
@@ -9,9 +7,10 @@ const UserSchema = mongoose.Schema({
     lastName: String,
     email: String,
     phone: String,
-    websites: [
-        WebsiteSchema
-    ],
+    websites: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Website"
+    }],
     dateCreated: {
         type: Date,
         default: Date.now
