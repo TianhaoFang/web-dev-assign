@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PageSchema = require("page.schema.server");
+const PageSchema = require("./page.schema.server");
 
 const WebsiteSchema = mongoose.Schema({
     _user: {

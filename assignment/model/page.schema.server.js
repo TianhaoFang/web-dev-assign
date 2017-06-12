@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const WidgetSchema = require("widget.schema.server");
+const WidgetSchema = require("./widget.schema.server");
 
 const PageSchema = mongoose.Schema({
     _website: {
