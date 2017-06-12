@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
-    app.delete("/app/user/:userId", deleteUser);
+    app.delete("/api/user/:userId", deleteUser);
 
     async function createUser(req, res) {
         let user = req.body;
@@ -52,15 +52,10 @@ module.exports = function (app) {
         sendNullableJson(res, await User.updateUser(userId, user));
     }
 
-    function deleteUser(req, res){
+    async function deleteUser(req, res){
         const userId = req.params.userId;
-        for (let i = 0; i < users.length; i++) {
-            if (users[i]._id === userId) {
-                sendNullableJson(res, users.splice(i, 1)[0]);
-                return;
-            }
-        }
-        sendNullableJson(res, null);
+        console.log("delete user");
+        sendNullableJson(res, await User.deleteUser(userId));
     }
 
     function sendNullableJson(res, result) {
