@@ -3,27 +3,23 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController(UserService, $location, UtilService) {
+    function RegisterController(UserService, $location) {
         var vm = this;
 
         vm.register = function (username, password, password2) {
-            UtilService.catchWithAlert(() => {
-                    if (password === password2 && password) {
-                        let newUser = {
-                            username: username,
-                            password: password,
-                            firstName: "",
-                            lastName: ""
-                        };
-                        return UserService.createUser(newUser).then((user) => {
-                            $location.url("/user/" + newUser._id);
-                        });
-                    } else {
-                        vm.hasError = true;
-                        return Promise.resolve("has error");
-                    }
-                }
-            )
+            if (password === password2 && password) {
+                let newUser = {
+                    username: username,
+                    password: password,
+                    firstName: "",
+                    lastName: ""
+                };
+                return UserService.createUser(newUser).then((user) => {
+                    $location.url("/user/" + newUser._id);
+                });
+            } else {
+                vm.hasError = true;
+            }
         };
 
         init();
