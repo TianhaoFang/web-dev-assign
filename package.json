@@ -20,6 +20,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
-  "license": "ISC"
+  "author": "Tianhao Fang",
+  "license": "ISC",
+  "engines": {
+    "node": "7.10.x"
+  }
 }
