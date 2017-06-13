@@ -33,7 +33,7 @@ Website.findWebsiteById = async function (websiteId) {
 };
 
 Website.updateWebsite = async function (websiteId, website) {
-    const oldOne = this.findWebsiteById(websiteId);
+    const oldOne = await this.findWebsiteById(websiteId);
     if(!oldOne) return null;
     website = toPojo(website);
     delete website._id;

@@ -14,7 +14,7 @@ User.createUser = function (user) {
 
 User.findUserById = async function (userId) {
     if (!validId(userId)) return null;
-    return this.findById(userId).exec();
+    return await this.findById(userId).exec();
 };
 
 User.findUserByUsername = function (username) {
@@ -39,7 +39,7 @@ User.updateUser = async function (userId, user) {
 User.deleteUser = async function (userId) {
     const user = await this.findUserById(userId);
     if (!user) return null;
-    await Promise.all([this.deleteOne({_id: userId})]
+    await Promise.all([this.deleteOne({_id: user._id})]
         .concat(user.websites.map(Website.deleteWebsite)));
     return user;
 };

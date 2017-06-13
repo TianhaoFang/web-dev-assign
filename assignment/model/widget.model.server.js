@@ -11,7 +11,7 @@ Widget.createWidget = async function (pageId, widget) {
     widget = toPojo(widget);
     widget._page = page._id;
     delete widget.dateCreated;
-    const instance = Widget.create(widget);
+    const instance = await Widget.create(widget);
     page.widgets.push(instance._id);
     await page.save();
     return instance;
@@ -24,9 +24,9 @@ Widget.findAllWidgetsForPage = async function (pageId) {
     return page.widgets;
 };
 
-Widget.findWidgetById = function(widgetId) {
+Widget.findWidgetById = async function(widgetId) {
     if(!validId(widgetId)) return null;
-    return this.findById(widgetId).exec();
+    return await this.findById(widgetId).exec();
 };
 
 Widget.updateWidget = function(widgetId, widget) {
@@ -38,7 +38,7 @@ Widget.updateWidget = function(widgetId, widget) {
 };
 
 Widget.deleteWidget = async function(widgetId) {
-    const widget = this.findWidgetById(widgetId);
+    const widget = await this.findWidgetById(widgetId);
     if(!widget) return null;
     await Promise.all([
         this.deleteOne({_id: widget._id}),
