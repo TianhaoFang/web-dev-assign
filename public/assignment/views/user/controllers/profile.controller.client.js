@@ -25,6 +25,14 @@
             );
         };
 
+        vm.deleteUser = function (id) {
+            function common() {
+                $location.url("/login");
+            }
+            if(!confirm("delete current user? all the website and pages will deleted!")) return;
+            return UserService.deleteUser(id).then(common, common);
+        };
+
         function init() {
             UserService.findUserById(userId).then((user) => {
                 if (!user) throw 4;

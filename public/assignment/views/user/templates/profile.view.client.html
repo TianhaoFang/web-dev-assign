@@ -38,8 +38,10 @@
 
     <a class="btn btn-primary btn-block"
        ng-href="{{model.websiteLink}}">Websites</a>
-    <a class="btn btn-danger  btn-block"
+    <a class="btn btn-danger btn-block"
        ng-href="#!/login">Logout</a>
+    <a class="btn btn-danger btn-block" ng-click="model.deleteUser(model._id)"
+       ng-href="#!/login">Delete this user</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom navy-color">
