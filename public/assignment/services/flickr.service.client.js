@@ -4,7 +4,7 @@
         .factory("FlickrService", FlickrService);
     
     function FlickrService($http) {
-        let urlBase = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&test=TEXT";
+        let urlBase = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT";
         let key = "95a749a852b4e95944cca092880cecf3";
 
         return {
