@@ -9,11 +9,11 @@ module.exports = function (app) {
 
     async function createUser(req, res) {
         let user = req.body;
-        if(!user.name) return json.status(400).json({
-            message: "name is required"
+        if(!user.username) return res.status(400).json({
+            message: "username is required"
         });
         let existUser = await User.findUserByUsername(user.name);
-        if(existUser) return json.status(400).json({
+        if(existUser) return res.status(400).json({
             message: "the username is already used"
         });
         res.json(await User.createUser(user));
