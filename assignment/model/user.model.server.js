@@ -1,32 +1,33 @@
 const mongoose = require("mongoose");
 
 const User = mongoose.model("User", require("./user.schema.server"));
+const Website = require("./website.model.server");
 
 const validId = mongoose.Types.ObjectId.isValid;
 
-User.createUser = function(user){
+User.createUser = function (user) {
     user.websites = [];
     delete user.dateCreated;
     user = new this(user);
     return user.save();
 };
 
-User.findUserById = async function(userId){
-    if(!validId(userId)) return null;
+User.findUserById = async function (userId) {
+    if (!validId(userId)) return null;
     return this.findById(userId).exec();
 };
 
-User.findUserByUsername = function(username){
+User.findUserByUsername = function (username) {
     return this.findOne({username}).exec();
 };
 
-User.findUserByCredentials = function(username, password){
+User.findUserByCredentials = function (username, password) {
     return this.findOne({username, password}).exec();
 };
 
-User.updateUser = async function(userId, user){
+User.updateUser = async function (userId, user) {
     let oldUser = await this.findUserById(userId);
-    if(!oldUser) return null;
+    if (!oldUser) return null;
     user = toPojo(user);
     delete user._id;
     delete user.dateCreated;
@@ -37,15 +38,16 @@ User.updateUser = async function(userId, user){
 
 User.deleteUser = async function (userId) {
     const user = await this.findUserById(userId);
-    if(!user) return null;
-    await this.deleteOne({_id: userId});
+    if (!user) return null;
+    await Promise.all([this.deleteOne({_id: userId})]
+        .concat(user.websites.map(Website.deleteWebsite)));
     return user;
 };
 
 function toPojo(managed) {
-    if(managed instanceof User){
+    if (managed instanceof User) {
         return managed.toObject();
-    }else{
+    } else {
         return managed;
     }
 }
