@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Page = mongoose.model("Page", require("./page.schema.server"));
 const Website = require("./website.model.server");
+const Widget = require("./widget.model.server");
 
 module.exports = Page;
 
@@ -46,7 +47,8 @@ Page.deletePage = async function(pageId) {
     if(!result) return null;
     await Promise.all([
         this.deleteOne({_id: result._id}),
-        Website.update({_id: result._website}, {$pull: {pages: pageId}})
+        Website.update({_id: result._website}, {$pull: {pages: pageId}}),
+        Widget.deleteMany({_page: result._id})
     ]);
     return result;
 };
