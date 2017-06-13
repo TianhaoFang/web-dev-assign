@@ -28,7 +28,8 @@ body {
 }
 
 .grey-color a {
-    color: gray; !important;
+    color: gray;
+!important;
 }
 
 .navbar.navbar-default.navbar-fixed-bottom {
@@ -39,19 +40,33 @@ body {
     .navbar-header b {
         font-size: 150%;
     }
+
     .glyphicon {
-        padding-right: 10px; !important;
+        padding-right: 10px;
+    !important;
     }
 }
 
+.youtube-widget {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+.youtube-widget iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
 /*@media (max-width: 350px) {*/
-    /*.navbar-header b {*/
-        /*font-size: 90%;*/
-    /*}*/
+/*.navbar-header b {*/
+/*font-size: 90%;*/
 /*}*/
-
-
-
+/*}*/
 
 .navy-color .back-arrow {
     color: white;
