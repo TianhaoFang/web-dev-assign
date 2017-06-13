@@ -15,7 +15,7 @@
         </div>
     </div>
 </nav>
-<div class="container" ng-switch="model.item.widgetType">
+<div class="container" ng-switch="model.item.type">
     <div ng-switch-when="HEADING">
         <ng-include src="'views/widget/editors/widget-heading-edit.view.client.html'"></ng-include>
     </div>
@@ -24,6 +24,9 @@
     </div>
     <div ng-switch-when="YOUTUBE">
         <ng-include src="'views/widget/editors/widget-youtube-edit.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-default>
+        <a href="" class="btn btn-block btn-danger" ng-click="model.deleteItem(model.item)">Delete</a>
     </div>
 </div>
 

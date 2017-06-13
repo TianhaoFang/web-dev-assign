@@ -11,7 +11,7 @@
 
         vm.newWidget = function (type) {
             WidgetService.createWidget(pageId, {
-                widgetType: type
+                type: type
             }).then(result => {
                 $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId
                     + "/widget/" + result._id);
