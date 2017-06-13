@@ -1,0 +1,18 @@
+<form>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" ng-model="model.item.name"/>
+    </div>
+    <div class="form-group">
+        <label for="text">Text</label>
+        <!--<input class="form-control" type="text" id="text"-->
+               <!--ng-model="model.item.text"/>-->
+        <div>
+            <text-angular class="" id="text" ng-model="model.item.text"
+                          ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]">
+            </text-angular>
+        </div>
+    </div>
+    <a href="" class="btn btn-block btn-danger" ng-click="model.deleteItem(model.item)">Delete</a>
+</form>
+

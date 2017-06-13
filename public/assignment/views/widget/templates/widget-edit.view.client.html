@@ -25,6 +25,9 @@
     <div ng-switch-when="YOUTUBE">
         <ng-include src="'views/widget/editors/widget-youtube-edit.view.client.html'"></ng-include>
     </div>
+    <div ng-switch-when="HTML">
+        <ng-include src="'views/widget/editors/widget-html-edit.view.client.html'"></ng-include>
+    </div>
     <div ng-switch-default>
         <a href="" class="btn btn-block btn-danger" ng-click="model.deleteItem(model.item)">Delete</a>
     </div>
