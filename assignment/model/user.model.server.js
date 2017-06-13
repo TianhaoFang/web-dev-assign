@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const User = mongoose.model("User", require("./user.schema.server"));
-const Website = require("./website.model.server");
 
 const validId = mongoose.Types.ObjectId.isValid;
 
@@ -37,6 +36,7 @@ User.updateUser = async function (userId, user) {
 };
 
 User.deleteUser = async function (userId) {
+    const Website = this.model("Website");
     const user = await this.findUserById(userId);
     if (!user) return null;
     await Promise.all([this.deleteOne({_id: user._id})]

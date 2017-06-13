@@ -3,9 +3,8 @@ const mongoose = require("mongoose");
 const Widget = mongoose.model("Widget", require("./widget.schema.server"));
 module.exports = Widget;
 
-const Page = require("./page.model.server");
-
 Widget.createWidget = async function (pageId, widget) {
+    const Page = this.model("Page");
     let page = await Page.findPageById(pageId);
     if(!page) return null;
     widget = toPojo(widget);
@@ -18,9 +17,9 @@ Widget.createWidget = async function (pageId, widget) {
 };
 
 Widget.findAllWidgetsForPage = async function (pageId) {
-    let page = await Page.findPageById(pageId);
+    const Page = this.model("Page");
+    let page = await Page.findById(pageId).populate("widgets").exec();
     if(!page) return [];
-    page = await page.populate("widgets");
     return page.widgets;
 };
 
@@ -38,6 +37,7 @@ Widget.updateWidget = function(widgetId, widget) {
 };
 
 Widget.deleteWidget = async function(widgetId) {
+    const Page = this.model("Page");
     const widget = await this.findWidgetById(widgetId);
     if(!widget) return null;
     await Promise.all([
@@ -48,6 +48,7 @@ Widget.deleteWidget = async function(widgetId) {
 };
 
 Widget.reorderWidget = async function (pageId, start, end) {
+    const Page = this.model("Page");
     let page = await Page.findPageById(pageId);
     if(!page) return SortResult.NoPage();
     const length = page.widgets.length;

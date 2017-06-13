@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 
 const Page = mongoose.model("Page", require("./page.schema.server"));
-const Website = require("./website.model.server");
-const Widget = require("./widget.model.server");
 
 module.exports = Page;
 
 Page.createPage = async function (websiteId, page) {
+    const Website = this.model("Website");
     const website = await Website.findWebsiteById(websiteId);
     if(!website) return null;
     page = toPojo(page);
@@ -20,9 +19,10 @@ Page.createPage = async function (websiteId, page) {
 };
 
 Page.findAllPagesForWebsite = async function (websiteId) {
-    let website = await Website.findWebsiteById(websiteId);
+    const Website = this.model("Website");
+    if(!validId(websiteId)) return [];
+    let website = await Website.findById(websiteId).populate("pages").exec();
     if(!website) return [];
-    website = await website.populate("pages");
     return website.pages;
 };
 
@@ -43,6 +43,8 @@ Page.updatePage = async function (pageId, page) {
 };
 
 Page.deletePage = async function(pageId) {
+    const Website = this.model("Website");
+    const Widget = this.model("Widget");
     const result = await this.findPageById(pageId);
     if(!result) return null;
     await Promise.all([
