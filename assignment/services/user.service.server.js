@@ -12,7 +12,7 @@ module.exports = function (app) {
         if(!user.username) return res.status(400).json({
             message: "username is required"
         });
-        let existUser = await User.findUserByUsername(user.name);
+        let existUser = await User.findUserByUsername(user.username);
         if(existUser) return res.status(400).json({
             message: "the username is already used"
         });
