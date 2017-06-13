@@ -3,3 +3,4 @@ node_modules
 *.iml
 /public/assignment/bundle.js
 /public/assignment/bundle.js.map
+/public/uploads/
