@@ -40,7 +40,7 @@ User.deleteUser = async function (userId) {
     const user = await this.findUserById(userId);
     if (!user) return null;
     await Promise.all([this.deleteOne({_id: user._id})]
-        .concat(user.websites.map(Website.deleteWebsite)));
+        .concat(user.websites.map(w => Website.deleteWebsite(w))));
     return user;
 };
 
