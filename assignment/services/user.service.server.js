@@ -1,4 +1,10 @@
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 const User = require("./../model/user.model.server");
+
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
+passport.use(new LocalStrategy(localStrategy));
 
 module.exports = function (app) {
     app.post("/api/user", createUser);
@@ -58,3 +64,31 @@ module.exports = function (app) {
         }
     }
 };
+
+function serializeUser(user, done) {
+    done(null, user);
+}
+
+async function deserializeUser(user, done) {
+    try{
+        const queryUser = await User.findUserById(user._id);
+        if(!queryUser) return done(null, false);
+        return done(null, queryUser);
+    }catch (err){
+        done(err, null);
+    }
+}
+
+async function localStrategy(username, password, done) {
+    try{
+        const user = await User.findUserByCredentials(username, password);
+        if(user && user.username === username && user.password === password){
+            return done(null, user);
+        }else{
+            return done(null, false);
+        }
+    }catch (err){
+        if(!err) err = new Error();
+        return done(err, null);
+    }
+}
