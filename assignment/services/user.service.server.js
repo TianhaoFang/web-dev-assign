@@ -86,7 +86,7 @@ module.exports = function (app) {
     }
 
     function facebookLogin(req, res) {
-        res.redirect("/assignment/index.html#!/user/" + res.user._id);
+        res.redirect("/assignment/index.html#!/user/" + req.user._id);
     }
 
     function logout(req, res) {
