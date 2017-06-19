@@ -27,6 +27,12 @@
             },
             getLoggedIn: function () {
                 return $http.get("/api/loggedin").then(parseData);
+            },
+            login: function (username, password) {
+                return $http.post("/api/login", {username, password}).then(parseData);
+            },
+            logout: function () {
+                return $http.post("/api/logout").then(parseData);
             }
         };
     }

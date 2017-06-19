@@ -7,7 +7,7 @@
 
             vm.login = function (username, password) {
                 console.log("start login");
-                UserService.findUserByCredentials(username, password).then((user) => {
+                UserService.login(username, password).then((user) => {
                     console.log("finish login with right user");
                     $location.url("/user/" + user._id);
                 }).catch((response) => vm.hasError = true);

@@ -33,6 +33,10 @@
             return UserService.deleteUser(id).then(common, common);
         };
 
+        vm.logout = function () {
+            return UserService.logout().then(console.log);
+        };
+
         function init() {
             UserService.findUserById(userId).then((user) => {
                 if (!user) throw 4;

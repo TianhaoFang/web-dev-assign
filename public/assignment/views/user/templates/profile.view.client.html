@@ -38,7 +38,7 @@
 
     <a class="btn btn-primary btn-block"
        ng-href="{{model.websiteLink}}">Websites</a>
-    <a class="btn btn-danger btn-block"
+    <a class="btn btn-danger btn-block" ng-click="model.logout()"
        ng-href="#!/login">Logout</a>
     <a class="btn btn-danger btn-block" ng-click="model.deleteUser(model._id)"
        ng-href="#!/login">Delete this user</a>
