@@ -28,8 +28,10 @@ module.exports = function (app) {
     app.post("/api/login", passport.authenticate("local"), successLogin);
     app.post("/api/logout", logout);
     app.get("/api/loggedin", loggedin);
-    app.get("/api/auth/FB", passport.authenticate("facebook"));
-    app.get("/api/auth/FB/callback", passport.authenticate("facebook"));
+    app.get("/api/auth/FB", passport.authenticate("facebook", { scope: [
+        "email", "username"
+    ]}));
+    app.get("/api/auth/FB/callback", passport.authenticate("facebook"), facebookLogin);
 
     async function createUser(req, res) {
         let user = req.body;
@@ -85,6 +87,10 @@ module.exports = function (app) {
         sendNullableJson(res, req.user);
     }
 
+    function facebookLogin(req, res) {
+        res.redirect("/assignment/index.html#!/user/" + res.user._id);
+    }
+
     function logout(req, res) {
         req.logOut();
         res.json({"message": "ok"});
@@ -131,11 +137,36 @@ async function localStrategy(username, password, done) {
     }
 }
 
-function facebookStrategy(token, refreshToken, profile, done) {
-    console.log(JSON.stringify(profile));
-    console.log("profile", profile);
-    console.log("profile.id", profile.id);
-    console.log("profile.name", profile.name);
-    console.log("profile.emails", profile.emails);
-    return done(null, false);
+async function facebookStrategy(token, refreshToken, profile, done) {
+    try{
+        console.log(JSON.stringify(profile));
+        console.log("profile", profile);
+        console.log("profile.id", profile.id);
+        console.log("profile.name", profile.name);
+        console.log("profile.emails", profile.emails);
+
+        let user = await User.findUserByFacebookId(profile.id);
+        if(!user){
+            user = Object.assign({}, {
+                username: profile.username,
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                facebook: {
+                    id: profile.id,
+                    token: token
+                }
+            });
+
+            if(profile.emails && profile.emails[0] && profile.emails[0].value){
+                user.email = profile.emails[0].value;
+            }
+
+            user = await User.createUser(user);
+            return done(null, user);
+        }else{
+            return done(null, user);
+        }
+    }catch (error){
+        return done(error);
+    }
 }
