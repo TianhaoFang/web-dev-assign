@@ -2,16 +2,23 @@
     <h1>Login</h1>
     <form name="loginForm" novalidate>
         <input type="text" required
+               name="username"
                class="form-control"
                placeholder="username"
                ng-model="username"/>
+        <div class="alert alert-danger" ng-show="loginForm.username.$invalid">
+            username is required
+        </div>
         <input type="password" required
+               name="password"
                class="form-control"
                placeholder="password"
                ng-model="password"/>
-        <span ng-show="model.hasError" class="help-block has-error">The user name and password is incorrect</span>
+        <div class="alert alert-danger" ng-show="loginForm.password.$invalid">
+            password is required
+        </div>
         <button class="btn btn-primary btn-block" ng-disabled="loginForm.$invalid"
-           ng-href="" ng-click="model.login(username, password)">Login</button>
+           ng-click="model.login(username, password)">Login</button>
         <a class="btn btn-success btn-block"
            ng-href="#!/register">Register</a>
     </form>

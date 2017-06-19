@@ -8,7 +8,7 @@
                 <b class="">New Page</b>
             </a>
             <p class="navbar-text pull-right">
-                <a href="" class="" ng-click="model.newPage(model.item)">
+                <a href="" ng-show="pageForm.$valid" ng-click="model.newPage(model.item)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -18,15 +18,19 @@
 
 
 <div class="container">
-    <form>
+    <form name="pageForm">
         <div class="form-group">
             <label class="" for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Page Name" ng-model="model.item.name"/>
+            <input type="text" class="form-control" id="name" name="name"
+                   placeholder="Page Name" ng-model="model.item.name" required/>
+            <div class="alert alert-danger" ng-show="pageForm.name.$invalid">
+                name is required
+            </div>
         </div>
         <div class="form-group">
             <label class="" for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Page Title"
-                   ng-model="model.item.description"/>
+            <input type="text" class="form-control" id="title" name="title"
+                   placeholder="Page Title" ng-model="model.item.description"/>
         </div>
     </form>
 </div>

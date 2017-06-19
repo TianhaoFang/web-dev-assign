@@ -22,7 +22,8 @@
                 <b class="">New Website</b>
             </a>
             <p class="navbar-text pull-right">
-                <a ng-href="" class="" ng-click="model.createItem(model.newItem)">
+                <a ng-href="" ng-show="newForm.$valid"
+                   ng-click="model.createItem(model.newItem)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -49,18 +50,21 @@
         </table>
     </div>
 
-    <div class="col-sm-8 container">
+    <form class="col-sm-8 container" name="newForm">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="input name"
-                   ng-model="model.newItem.name"/>
+                   ng-model="model.newItem.name" name="name" required/>
+            <div class="alert alert-danger" ng-show="newForm.name.$invalid">
+                name is required
+            </div>
         </div>
         <div class="form-group">
             <label for="name">Description</label>
             <textarea class="form-control" id="describe" ng-model="model.newItem.description"
                       placeholder="Description" rows="5"></textarea>
         </div>
-    </div>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom navy-color">

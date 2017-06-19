@@ -1,22 +1,36 @@
 <div class="container">
     <h1>Register</h1>
-    <input type="text"
-           class="form-control"
-           placeholder="username"
-           ng-model="username"/>
-    <input type="password"
-           class="form-control"
-           placeholder="password"
-           ng-model="password"/>
-    <input type="password"
-           class="form-control"
-           placeholder="very password"
-           ng-model="password2"/>
-    <span ng-show="model.hasError" class="has-error help-block">
-        Password should not be empty or password should be same
-    </span>
-    <a class="btn btn-primary btn-block"
-       ng-href="" ng-click="model.register(username, password, password2)">Register</a>
-    <a class="btn btn-danger  btn-block"
-       href="#!/login">Cancel</a>
+    <form name="myForm">
+        <input type="text"
+               name="username"
+               class="form-control"
+               placeholder="username"
+               ng-model="username" required/>
+        <div class="alert alert-danger" ng-show="myForm.username.$invalid">
+            username is required
+        </div>
+        <input type="password"
+               name="password"
+               class="form-control"
+               placeholder="password"
+               ng-model="password" required/>
+        <div class="alert alert-danger" ng-show="myForm.password.$invalid">
+            password is required
+        </div>
+        <input type="password"
+               name="password2"
+               class="form-control"
+               placeholder="very password"
+               ng-model="password2" required ng-pattern="password"/>
+        <div class="alert alert-danger" ng-show="myForm.password2.$error.required">
+            password verify is required
+        </div>
+        <div class="alert alert-danger" ng-show="myForm.password2.$error.pattern">
+            password is not same
+        </div>
+        <button class="btn btn-primary btn-block" ng-disabled="myForm.$invalid"
+           ng-click="model.register(username, password, password2)">Register</button>
+        <a class="btn btn-danger  btn-block"
+           href="#!/login">Cancel</a>
+    </form>
 </div>

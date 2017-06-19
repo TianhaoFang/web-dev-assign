@@ -21,7 +21,7 @@
                 <b class="">Edit Website</b>
             </a>
             <p class="navbar-text pull-right">
-                <a href="" class="" ng-click="model.updateWebsite(model.item)">
+                <a href="" ng-show="editForm.$valid" ng-click="model.updateWebsite(model.item)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -48,11 +48,14 @@
         </table>
     </div>
 
-    <div class="col-sm-8 container">
+    <form class="col-sm-8 container" name="editForm">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="input name" value="Blogger"
-                   ng-model="model.item.name"/>
+                   ng-model="model.item.name" name="name" required/>
+            <div class="alert alert-danger" ng-show="editForm.name.$invalid">
+                name is required
+            </div>
         </div>
         <div class="form-group">
             <label for="name">Description</label>
@@ -61,7 +64,7 @@
 cross multiple line</textarea>
         </div>
         <a ng-href="" ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-danger btn-block">Delete</a>
-    </div>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom navy-color">
