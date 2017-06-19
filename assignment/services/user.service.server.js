@@ -28,9 +28,7 @@ module.exports = function (app) {
     app.post("/api/login", passport.authenticate("local"), successLogin);
     app.post("/api/logout", logout);
     app.get("/api/loggedin", loggedin);
-    app.get("/api/auth/FB", passport.authenticate("facebook", { scope: [
-        "email", "username"
-    ]}));
+    app.get("/api/auth/FB", passport.authenticate("facebook", { scope: ["email"]}));
     app.get("/api/auth/FB/callback", passport.authenticate("facebook"), facebookLogin);
 
     async function createUser(req, res) {
