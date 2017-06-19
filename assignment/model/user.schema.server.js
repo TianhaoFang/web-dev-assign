@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require("./user.model.server");
 
 const UserSchema = mongoose.Schema({
     username: String,
@@ -15,6 +14,10 @@ const UserSchema = mongoose.Schema({
     dateCreated: {
         type: Date,
         default: Date.now
+    },
+    facebook: {
+        id: String,
+        token: String
     }
 });
 

@@ -1,11 +1,20 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const User = require("./../model/user.model.server");
-const { customAuth } = require("./middleware");
+const {customAuth} = require("./middleware");
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 passport.use(new LocalStrategy(localStrategy));
+
+const facebookConfig = {
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL
+};
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 const authSameUser = customAuth((user, req) => user._id.toString() === req.params.userId);
 
@@ -17,21 +26,23 @@ module.exports = function (app) {
     app.delete("/api/user/:userId", authSameUser, deleteUser);
     app.post("/api/login", passport.authenticate("local"), successLogin);
     app.post("/api/logout", logout);
-    app.get("/api/loggedin",  loggedin)
+    app.get("/api/loggedin", loggedin);
+    app.get("/api/auth/FB", passport.authenticate("facebook"));
+    app.get("/api/auth/FB/callback", passport.authenticate("facebook"));
 
     async function createUser(req, res) {
         let user = req.body;
-        if(!user.username) return res.status(400).json({
+        if (!user.username) return res.status(400).json({
             message: "username is required"
         });
         let existUser = await User.findUserByUsername(user.username);
-        if(existUser) return res.status(400).json({
+        if (existUser) return res.status(400).json({
             message: "the username is already used"
         });
         user = await User.createUser(user);
         await new Promise((resolve, reject) => {
             req.login(user, (err, result) => {
-                if(err) reject(err);
+                if (err) reject(err);
                 else resolve(result);
             });
         });
@@ -63,7 +74,7 @@ module.exports = function (app) {
         sendNullableJson(res, await User.updateUser(userId, user));
     }
 
-    async function deleteUser(req, res){
+    async function deleteUser(req, res) {
         const userId = req.params.userId;
         console.log("delete user");
         sendNullableJson(res, await User.deleteUser(userId));
@@ -75,10 +86,10 @@ module.exports = function (app) {
 
     function logout(req, res) {
         req.logOut();
-        res.json({ "message": "ok" });
+        res.json({"message": "ok"});
     }
 
-    function loggedin(req, res){
+    function loggedin(req, res) {
         res.json(req.isAuthenticated() ? req.user : false);
     }
 
@@ -96,25 +107,30 @@ function serializeUser(user, done) {
 }
 
 async function deserializeUser(user, done) {
-    try{
+    try {
         const queryUser = await User.findUserById(user._id);
-        if(!queryUser) return done(null, false);
+        if (!queryUser) return done(null, false);
         return done(null, queryUser);
-    }catch (err){
+    } catch (err) {
         done(err, null);
     }
 }
 
 async function localStrategy(username, password, done) {
-    try{
+    try {
         const user = await User.findUserByCredentials(username, password);
-        if(user && user.username === username && user.password === password){
+        if (user && user.username === username && user.password === password) {
             return done(null, user);
-        }else{
+        } else {
             return done(null, false);
         }
-    }catch (err){
-        if(!err) err = new Error();
+    } catch (err) {
+        if (!err) err = new Error();
         return done(err, null);
     }
+}
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    console.log(JSON.stringify(profile));
+    return done(null, false);
 }

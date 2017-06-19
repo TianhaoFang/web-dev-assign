@@ -24,6 +24,10 @@ User.findUserByCredentials = function (username, password) {
     return this.findOne({username, password}).exec();
 };
 
+User.findUserByFacebookId = function (facebookId) {
+    return this.findOne({ "facebook.id": facebookId });
+};
+
 User.updateUser = async function (userId, user) {
     let oldUser = await this.findUserById(userId);
     if (!oldUser) return null;
