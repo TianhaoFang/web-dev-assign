@@ -27,7 +27,14 @@ module.exports = function (app) {
         if(existUser) return res.status(400).json({
             message: "the username is already used"
         });
-        res.json(await User.createUser(user));
+        user = await User.createUser(user);
+        await new Promise((resolve, reject) => {
+            req.login(user, (err, result) => {
+                if(err) reject(err);
+                else resolve(result);
+            });
+        });
+        res.json(user);
     }
 
     async function findUser(req, res) {
