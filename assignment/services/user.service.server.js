@@ -132,5 +132,9 @@ async function localStrategy(username, password, done) {
 
 function facebookStrategy(token, refreshToken, profile, done) {
     console.log(JSON.stringify(profile));
+    console.log("profile", profile);
+    console.log("profile.id", profile.id);
+    console.log("profile.name", profile.name);
+    console.log("profile.emails", profile.emails);
     return done(null, false);
 }
