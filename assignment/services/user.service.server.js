@@ -11,7 +11,8 @@ passport.use(new LocalStrategy(localStrategy));
 const facebookConfig = {
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: process.env.FACEBOOK_CALLBACK_URL
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified']
 };
 
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
