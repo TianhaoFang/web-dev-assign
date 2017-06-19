@@ -1,17 +1,22 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./../model/user.model.server");
+const { customAuth } = require("./middleware");
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 passport.use(new LocalStrategy(localStrategy));
 
+const authSameUser = customAuth((user, req) => user._id.toString() === req.params.userId);
+
 module.exports = function (app) {
     app.post("/api/user", createUser);
     app.get("/api/user", findUser);
-    app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", updateUser);
-    app.delete("/api/user/:userId", deleteUser);
+    app.get("/api/user/:userId", authSameUser, findUserById);
+    app.put("/api/user/:userId", authSameUser, updateUser);
+    app.delete("/api/user/:userId", authSameUser, deleteUser);
+    app.post("/api/login", passport.authenticate("local"), successLogin);
+    app.post("/api/logout", logout);
 
     async function createUser(req, res) {
         let user = req.body;
@@ -54,6 +59,15 @@ module.exports = function (app) {
         const userId = req.params.userId;
         console.log("delete user");
         sendNullableJson(res, await User.deleteUser(userId));
+    }
+
+    function successLogin(req, res) {
+        sendNullableJson(res, req.user);
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.json({ "message": "ok" });
     }
 
     function sendNullableJson(res, result) {
