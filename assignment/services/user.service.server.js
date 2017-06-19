@@ -12,12 +12,12 @@ const authSameUser = customAuth((user, req) => user._id.toString() === req.param
 module.exports = function (app) {
     app.post("/api/user", createUser);
     app.post("/api/register", createUser);
-    app.get("/api/user", findUser);
     app.get("/api/user/:userId", authSameUser, findUserById);
     app.put("/api/user/:userId", authSameUser, updateUser);
     app.delete("/api/user/:userId", authSameUser, deleteUser);
     app.post("/api/login", passport.authenticate("local"), successLogin);
     app.post("/api/logout", logout);
+    app.get("/api/loggedin",  loggedin)
 
     async function createUser(req, res) {
         let user = req.body;
@@ -76,6 +76,10 @@ module.exports = function (app) {
     function logout(req, res) {
         req.logOut();
         res.json({ "message": "ok" });
+    }
+
+    function loggedin(req, res){
+        res.json(req.isAuthenticated() ? req.user : false);
     }
 
     function sendNullableJson(res, result) {

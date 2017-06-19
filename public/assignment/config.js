@@ -21,7 +21,8 @@
                 .when("/user/:uid", {
                     templateUrl: "views/user/templates/profile.view.client.html",
                     controller: "ProfileController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {loggedin: checkLoggedin}
                 })
 
                 .when("/user/:uid/website", {
@@ -77,4 +78,18 @@
                     controllerAs: "model"
                 })
         })
+    function checkLoggedin($q, $timeout, $http, $location, $rootScope, UserService) {
+        let deferred = $q.defer();
+        UserService.getLoggedIn().then(function (user) {
+            $rootScope.errorMessage = null;
+            if (user) {
+                deferred.resolve(user);
+            } else {
+                deferred.reject();
+                alert("please login first");
+                $location.url('/');
+            }
+        });
+        return deferred.promise;
+    }
 })();

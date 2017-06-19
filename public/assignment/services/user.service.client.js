@@ -19,17 +19,14 @@
                     username: username
                 }}).then(parseData);
             },
-            findUserByCredentials: function(username, password){
-                return $http.get("/api/user", {params: {
-                    username: username,
-                    password: password
-                }}).then(parseData);
-            },
             updateUser: function(userId, user){
                 return $http.put("/api/user/" + userId, user).then(parseData);
             },
             deleteUser: function(userId){
                 return $http.delete("/api/user/" + userId).then(parseData);
+            },
+            getLoggedIn: function () {
+                return $http.get("/api/loggedin").then(parseData);
             }
         };
     }
