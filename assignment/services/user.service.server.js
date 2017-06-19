@@ -11,6 +11,7 @@ const authSameUser = customAuth((user, req) => user._id.toString() === req.param
 
 module.exports = function (app) {
     app.post("/api/user", createUser);
+    app.post("/api/register", createUser);
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", authSameUser, findUserById);
     app.put("/api/user/:userId", authSameUser, updateUser);

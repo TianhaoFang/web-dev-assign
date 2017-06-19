@@ -14,7 +14,7 @@
                     firstName: "",
                     lastName: ""
                 };
-                return UserService.createUser(newUser).then((user) => {
+                return UserService.register(newUser).then((user) => {
                     $location.url("/user/" + user._id);
                 }).catch(UtilService.alertError);
             } else {

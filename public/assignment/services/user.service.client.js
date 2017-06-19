@@ -8,8 +8,8 @@
 
         // the service
         return {
-            createUser: function(user) {
-                return $http.post("/api/user", user).then(parseData);
+            register: function(user) {
+                return $http.post("/api/register", user).then(parseData);
             },
             findUserById: function(userId) {
                 return $http.get("/api/user/" + userId).then(parseData);
